@@ -5,20 +5,16 @@ class Board(board: String) {
 	def checkForWinner(){
 		var result = false
 		possibilities.foreach{
-			x => 
+			t => 
 			if(result == false){
-				result = routine(getNextPossibility(x))
+				result = check(List(board.charAt(t._1), board.charAt(t._2), board.charAt(t._3)))
 			}
 		}
 		if(result == false){println("There was no winner")}
 	}
 
-	def getNextPossibility(t: (Int, Int, Int)):List[Char] = {
-		List(board.charAt(t._1), board.charAt(t._2), board.charAt(t._3))
-	}
-
-	def routine(possibility: List[Char]):Boolean = {
-		if(possibility.count(a => a == 'x') == 3 || possibility.count(a => a == 'y') == 3){
+	def check(possibility: List[Char]):Boolean = {
+		if(possibility.count(a => a == 'x') == 3 || possibility.count(a => a == 'o') == 3){
 			println("There was a winner!! => " + possibility(0))
 			true
 		}
